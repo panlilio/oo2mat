@@ -1,0 +1,460 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>OpenOrganelle MATLAB wrappers - README</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-12-08"><meta name="DC.source" content="readme.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>OpenOrganelle MATLAB wrappers - README</h1><!--introduction--><p>Guide to using MATLAB to access data from Janelia-COSEM's OpenOrganelle Project as stored on their AWS S3 bucket: s3://janelia-cosem/.</p><p>Author: Mia Panlilio (2021-12-01)</p><p>Consult class and method helpstrings for more information:</p><pre class="language-matlab">&gt;&gt; help openorganelle_filebrowser
+&gt;&gt; help openorganelle_dataset
+&gt;&gt; help openorganelle_dataset.get_organelle
+</pre><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Requirements</a></li><li><a href="#5">Class: openorganelle_filebrowser</a></li><li><a href="#6">Example: list datasets stored on AWS</a></li><li><a href="#7">Example: list all segmentation (label) layers available for jrc_macrophage-2</a></li><li><a href="#8">Class: openorganelle_dataset</a></li><li><a href="#10">Example: retrieve the mask for a specific mitochondrion instance</a></li><li><a href="#14">Example: retrieve multiple masks for specific mitochondria instances</a></li><li><a href="#18">Example: retrieve an arbitrary FIB-SEM volume</a></li><li><a href="#21">Example: retrieve an arbitrary label volume</a></li><li><a href="#22">Example: run catalog of centrioles</a></li></ul></div><h2 id="1">Requirements</h2><p>The two MATLAB classes described below retrieve OpenOrganelle data by wrapping the oo2mat Python module. Its main dependencies are:</p><div><ul><li>numpy</li><li>s3fs</li><li>scikit-image</li><li>fibsem-tools</li></ul></div><p>Note that oo2mat relies on Janelia's fibsem-tools package (currently available through pip installation), which requires an old version of the hdf5 and h5py packages to read N5 data. Due to version conflicts in these packages between MATLAB and fibsem-tools, <i>MATLAB must run Python out-of-process</i>. To check this, run:</p><pre class="language-matlab">&gt;&gt; pe = pyenv;
+&gt;&gt; disp(pe.ExecutionMode)
+</pre><p>If the output is not 'OutOfProcess', you must restart MATLAB and then change the default Python environment settings via:</p><pre class="language-matlab">&gt;&gt; pyenv(<span class="string">'ExecutionMode'</span>,<span class="string">'OutOfProcess'</span>)
+</pre><h2 id="5">Class: openorganelle_filebrowser</h2><p>The <b>openorganelle_filebrowser</b> class allows users to query general information about the OpenOrganelle datasets, e.g. the names of all available datasets and their associated segmentation masks. It should be initialized without any input arguments, as the default parameters defining the locations of the AWS S3 bucket, Python modules, and organelle catalogs should be stable at least for use on the St. Jude network.</p><pre class="codeinput">fb = openorganelle_filebrowser;
+disp(fb)
+</pre><pre class="codeoutput">  openorganelle_filebrowser with properties:
+
+               s3bucket: 's3://janelia-cosem/'
+    bounding_boxes_path: '/research/sharedresources/cbi/common/mia/OpenOrganelle/lib/organelle_bounding_boxes/'
+            oo2mat_path: '/research/sharedresources/cbi/common/mia/OpenOrganelle/python/'
+             oo2mat_mod: [1&times;1 py.module]
+
+</pre><h2 id="6">Example: list datasets stored on AWS</h2><pre class="codeinput">fb.ls_datasets;
+</pre><pre class="codeoutput">
+----- DATASETS in s3://janelia-cosem/ -----
+jrc_choroid-plexus-2
+jrc_cos7-11
+jrc_ctl-id8-1
+jrc_ctl-id8-2
+jrc_ctl-id8-3
+jrc_ctl-id8-4
+jrc_ctl-id8-5
+jrc_fly-acc-calyx-1
+jrc_fly-fsb-1
+jrc_hela-1
+jrc_hela-2
+jrc_hela-21
+jrc_hela-22
+jrc_hela-3
+jrc_hela-4
+jrc_hela-bfa
+jrc_hela-h89-1
+jrc_hela-h89-2
+jrc_jurkat-1
+jrc_macrophage-2
+jrc_mus-pancreas-1
+jrc_sum159-1
+
+</pre><h2 id="7">Example: list all segmentation (label) layers available for jrc_macrophage-2</h2><p>The following command displays a list of all segmentation types stored in the jrc_hela-2 N5. In principle, any of these can be catalogued into instance bounding boxes (see <b>openorganelle_dataset.do_catalog</b> below).</p><pre class="codeinput">fb.ls_segmentations(<span class="string">'jrc_macrophage-2'</span>);
+</pre><pre class="codeoutput">
+----- SEGMENTATIONS for jrc_macrophage-2 -----
+cent-dapp_pred
+cent-dapp_seg
+cent_pred
+cent_seg
+chrom_pred
+chrom_seg
+ecs_pred
+ecs_seg
+endo-mem_pred
+endo-mem_seg
+endo_er_contacts
+endo_golgi_contacts
+endo_mt_contacts
+endo_pred
+endo_seg
+er-mem_pred
+er-mem_seg
+er_curvature
+er_golgi_contacts
+er_medial-surface
+er_mito_contacts
+er_mt_contacts
+er_pm_contacts
+er_pred
+er_ribo_contacts
+er_seg
+er_vesicle_contacts
+eres_pred
+eres_seg
+golgi-mem_pred
+golgi-mem_seg
+golgi_mt_contacts
+golgi_pred
+golgi_seg
+golgi_vesicle_contacts
+gt
+ld-mem_pred
+ld-mem_seg
+ld_pred
+ld_seg
+lyso-mem_pred
+lyso-mem_seg
+lyso_pred
+lyso_seg
+mito-mem_pred
+mito-mem_seg
+mito_pm_contacts
+mito_pred
+mito_seg
+mito_skeleton
+mito_skeleton-lsp
+mt-in_pred
+mt-out_seg
+mt_nucleus_contacts
+mt_pm_contacts
+mt_vesicle_contacts
+ne-mem_pred
+ne-mem_seg
+ne_pred
+ne_seg
+nhchrom_pred
+nhchrom_seg
+np_pred
+np_seg
+nucleolus_pred
+nucleolus_seg
+nucleus_pred
+nucleus_seg
+pm_pred
+pm_seg
+ribo_classified
+ribo_pred
+ribo_seg
+vesicle-mem_pred
+vesicle-mem_seg
+vesicle_pred
+vesicle_seg
+
+</pre><h2 id="8">Class: openorganelle_dataset</h2><p>The <b>openorganelle_dataset</b> class is a subclass of openorganelle_filebrowser. This class is used to retrieve organelle volumes, and general image volumes, belonging to a specified biological cell. The class should be initialized with the cell of interest's COSEM name as the first input argument.</p><p>Let's say we want to probe jrc_hela-2:</p><pre class="codeinput">ds = openorganelle_dataset(<span class="string">'jrc_hela-2'</span>);
+disp(ds)
+</pre><pre class="codeoutput">  openorganelle_dataset with properties:
+
+           dataset_name: 'jrc_hela-2'
+               s3bucket: 's3://janelia-cosem/'
+    bounding_boxes_path: '/research/sharedresources/cbi/common/mia/OpenOrganelle/lib/organelle_bounding_boxes/'
+            oo2mat_path: '/research/sharedresources/cbi/common/mia/OpenOrganelle/python/'
+             oo2mat_mod: [1&times;1 py.module]
+
+</pre><p>In addition to returning arbitrary volumes from both FIB-SEM (grayscale) and segmentation (binary label) layers, this class uses and can be used to generate bounding box catalogs that retrieve sparse matrices with masks corresponding to specific instances of a given organelle.</p><p>Additionally, openorganelle_dataset inherits the usual properties and methods of its superclass with some minor modifications to make certain queries specific to the dataset of interest, e.g. openorganelle_dataset.ls_segmentations does not take any input arguments and simply returns the list of segmentation layers associated with the initialized dataset.</p><h2 id="10">Example: retrieve the mask for a specific mitochondrion instance</h2><p>Let's say we want the binary mask of the 25-th catalogued mitochrondrion.</p><pre class="codeinput">S = ds.get_organelle(<span class="string">'mito_seg'</span>,25);
+</pre><pre class="codeoutput">2021-12-08 10:42:44.116475 [INFO] User requested mito_seg at index = [25].
+2021-12-08 10:42:44.120011 [INFO] Retrieving index 1/1...
+2021-12-08 10:42:45.413346 [INFO] Retrieval of index 1/1 done.
+</pre><pre class="codeinput">disp(S)
+</pre><pre class="codeoutput">          data_mask: {[207&times;67&times;348 logical]}
+        data_fibsem: {1&times;0 cell}
+        cosem_label: 340
+     organelle_type: 'mito_seg'
+      organelle_idx: 24
+    pixelResolution: [1&times;1 struct]
+       urlpath_mask: 's3://janelia-cosem/jrc_hela-2/jrc_hela-2.n5/labels/mito_seg/s0'
+     urlpath_fibsem: ''
+     bounding_boxes: [250 1223 846 457 1290 1194]
+       catalog_path: '/research/sharedresources/cbi/common/mia/OpenOrganelle/lib/organelle_bounding_boxes/jrc_hela-2/mito_seg.json'
+       catalog_time: 1.6376e+09
+
+</pre><p>Notice that the organelle_idx field here is returned from Python and therefore 0-indexed (24), rather than MATLAB's 1-index (25).</p><h2 id="14">Example: retrieve multiple masks for specific mitochondria instances</h2><p>If multiple masks are needed, it is generally much faster to submit multiple indices to get_organelle at once rather than call the function repeatedly. Say we want the mitochrondria catalogued at [1,2,3,10,19,25,60] with their FIB-SEM grayscale values:</p><pre class="codeinput">S = ds.get_organelle(<span class="string">'mito_seg'</span>,[1:3,10,19,25,60],<span class="string">'with_fibsem'</span>,true);
+</pre><pre class="codeoutput">2021-12-08 10:42:47.247708 [INFO] User requested mito_seg at index = [1, 2, 3, 10, 19, 25, 60].
+2021-12-08 10:42:47.251416 [INFO] Retrieving index 1/7...
+2021-12-08 10:42:47.604173 [INFO] Retrieval of index 1/7 done.
+2021-12-08 10:42:47.607823 [INFO] Retrieving index 2/7...
+2021-12-08 10:42:48.223190 [INFO] Retrieval of index 2/7 done.
+2021-12-08 10:42:48.227140 [INFO] Retrieving index 3/7...
+2021-12-08 10:42:48.596816 [INFO] Retrieval of index 3/7 done.
+2021-12-08 10:42:48.600585 [INFO] Retrieving index 4/7...
+2021-12-08 10:42:49.259210 [INFO] Retrieval of index 4/7 done.
+2021-12-08 10:42:49.263013 [INFO] Retrieving index 5/7...
+2021-12-08 10:42:50.010480 [INFO] Retrieval of index 5/7 done.
+2021-12-08 10:42:50.013900 [INFO] Retrieving index 6/7...
+2021-12-08 10:42:50.685840 [INFO] Retrieval of index 6/7 done.
+2021-12-08 10:42:50.689308 [INFO] Retrieving index 7/7...
+2021-12-08 10:42:51.813232 [INFO] Retrieval of index 7/7 done.
+</pre><pre class="codeinput">disp(S)
+</pre><pre class="codeoutput">          data_mask: {1&times;7 cell}
+        data_fibsem: {1&times;7 cell}
+        cosem_label: [298 18 219 208 215 340 352]
+     organelle_type: 'mito_seg'
+      organelle_idx: [0 1 2 9 18 24 59]
+    pixelResolution: [1&times;1 struct]
+       urlpath_mask: 's3://janelia-cosem/jrc_hela-2/jrc_hela-2.n5/labels/mito_seg/s1'
+     urlpath_fibsem: 's3://janelia-cosem/jrc_hela-2/jrc_hela-2.n5/em/fibsem-uint16/s0'
+     bounding_boxes: [7&times;6 double]
+       catalog_path: '/research/sharedresources/cbi/common/mia/OpenOrganelle/lib/organelle_bounding_boxes/jrc_hela-2/mito_seg.json'
+       catalog_time: 1.6376e+09
+
+</pre><p>The image/mask volumes are stored in a cell array in the order that they were submitted. Then the mask and FIB-SEM data for the 25-th mitochrondrion are at the 6-th index of the returned arrays. However, when 'with_fibsem' is set to true, the resultant volumes are returned at a lower resolution:</p><pre class="codeinput">disp(size(S.data_mask{6}))
+</pre><pre class="codeoutput">   103    34   174
+
+</pre><p>This is because the label volumes were upscaled at Janelia (2x in all dimensions) for segmentation purposes and get_organelle returns volumes at the highest possible resolution while retaining a consistent coordinate system with FIB-SEM data if needed.</p><h2 id="18">Example: retrieve an arbitrary FIB-SEM volume</h2><p>Note that all bounding boxes stored in either a catalog or returned by get_organelle or get_volume functions obey the scikit-image convention of [x_min, y_min, z_min, x_max, y_max, z_max]. Say we want to look at the FIB-SEM volume defined by the bounding box [100,200,300,250,400,350]:</p><pre class="codeinput">V = ds.get_volume(<span class="string">'fibsem-uint8'</span>,[100,200,300,250,400,350]);
+whos <span class="string">V</span>
+</pre><pre class="codeoutput">  Name        Size                  Bytes  Class    Attributes
+
+  V         151x201x51            1547901  uint8              
+
+</pre><pre class="codeinput">disp(V(1:10,1:10))
+</pre><pre class="codeoutput">   186   178   188   182   183   188   183   191   187   186
+   188   181   181   185   189   188   188   190   181   185
+   183   176   190   182   181   181   179   184   180   184
+   188   183   190   193   191   183   181   179   179   183
+   184   182   187   189   187   188   191   181   184   187
+   190   187   187   186   188   194   185   193   189   196
+   184   185   185   187   185   186   181   195   187   178
+   180   181   194   181   185   187   179   181   194   185
+   181   182   184   178   179   181   180   185   189   180
+   189   185   181   182   185   188   186   188   185   189
+
+</pre><p>Again, by default the highest resolution is returned. Resolution levels can be explicitly requested, with input bounding boxes assumed to be on the coordinate system defined by the requested resolution level. The parameter 'resolution' should be an integer between 0 and 4 (or 5) in order of decreasing resolution.</p><pre class="codeinput">V = ds.get_volume(<span class="string">'fibsem-uint8'</span>,[100,200,300,250,400,350],<span class="string">'resolution'</span>,0);
+disp(V(1:10,1:10))
+</pre><pre class="codeoutput">   186   178   188   182   183   188   183   191   187   186
+   188   181   181   185   189   188   188   190   181   185
+   183   176   190   182   181   181   179   184   180   184
+   188   183   190   193   191   183   181   179   179   183
+   184   182   187   189   187   188   191   181   184   187
+   190   187   187   186   188   194   185   193   189   196
+   184   185   185   187   185   186   181   195   187   178
+   180   181   194   181   185   187   179   181   194   185
+   181   182   184   178   179   181   180   185   189   180
+   189   185   181   182   185   188   186   188   185   189
+
+</pre><h2 id="21">Example: retrieve an arbitrary label volume</h2><pre class="codeinput">V = ds.get_volume(<span class="string">'lyso_seg'</span>,[100,200,300,250,400,350]);
+whos <span class="string">V</span>
+</pre><pre class="codeoutput">  Name        Size                   Bytes  Class     Attributes
+
+  V         151x201x51            12383208  uint64              
+
+</pre><h2 id="22">Example: run catalog of centrioles</h2><p>Let's say we want to look at instances of segmented centrioles using get_organelle but the label volume has not been catalogued yet. To catalog:</p><pre class="codeinput">[catalog_filename,J] = ds.do_catalog(<span class="string">'cent_seg'</span>);
+</pre><pre class="codeoutput">2021-12-08 10:43:33.372910 [INFO] Checking bounding box regions for objects split at lower resolution.
+2021-12-08 10:43:33.377415 [INFO] Merged split objects. Total number of unique objects found at downscaled resolution: 10 -&gt; 6
+2021-12-08 10:43:33.379310 [INFO] Split check complete.
+2021-12-08 10:43:33.380962 [INFO] Checking bounding box regions for objects merged at lower resolution.
+2021-12-08 10:43:33.382582 [INFO] Checking region 1/6.
+2021-12-08 10:43:33.818103 [INFO] Checking region 2/6.
+2021-12-08 10:43:34.476628 [INFO] Checking region 3/6.
+2021-12-08 10:43:35.031143 [INFO] Checking region 4/6.
+2021-12-08 10:43:35.250622 [INFO] Checking region 5/6.
+2021-12-08 10:43:35.608912 [INFO] Checking region 6/6.
+2021-12-08 10:43:35.921992 [INFO] Total number of organelles found = 6.
+2021-12-08 10:43:35.929475 [INFO] Total time to catalog = 0:00:38.622030.
+</pre><p>By default, this function will not run if the catalog already exists but it can be forced to perform an overwrite ('overwrite_if_exists',true). Cataloguing returns the location of the catalog JSON:</p><pre class="codeinput">disp(catalog_filename)
+</pre><pre class="codeoutput">/research/sharedresources/cbi/common/mia/OpenOrganelle/lib/organelle_bounding_boxes/jrc_hela-2/cent_seg.json
+</pre><p>and a struct corresponding to the JSON:</p><pre class="codeinput">disp(J)
+</pre><pre class="codeoutput">         bounding_boxes: [6&times;6 double]
+           cosem_labels: [6&times;1 double]
+                   name: 'array-53b7b3f3715e2d3931a42e64a572a646'
+        pixelResolution: [1&times;1 struct]
+    merge_check_skipped: 0
+             urlpath_bb: 's3://janelia-cosem/jrc_hela-2/jrc_hela-2.n5/labels/cent_seg/s0'
+     urlpath_downsample: 's3://janelia-cosem/jrc_hela-2/jrc_hela-2.n5/labels/cent_seg/s3'
+           catalog_time: 1.6390e+09
+        time_to_catalog: '0:00:38.622030'
+
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% OpenOrganelle MATLAB wrappers - README
+% Guide to using MATLAB to access data from Janelia-COSEM's OpenOrganelle 
+% Project as stored on their AWS S3 bucket: s3://janelia-cosem/.
+%
+% Author: Mia Panlilio (2021-12-01)
+%
+% Consult class and method helpstrings for more information:
+% 
+%   >> help openorganelle_filebrowser
+%   >> help openorganelle_dataset
+%   >> help openorganelle_dataset.get_organelle
+
+%% Requirements
+% The two MATLAB classes described below retrieve OpenOrganelle data by wrapping 
+% the oo2mat Python module. Its main dependencies are:
+%
+% * numpy
+% * s3fs
+% * scikit-image
+% * fibsem-tools
+%
+% Note that oo2mat relies on Janelia's fibsem-tools package (currently 
+% available through pip installation), which requires an old version of the 
+% hdf5 and h5py packages to read N5 data. Due to version conflicts in these 
+% packages between MATLAB and fibsem-tools, _MATLAB must run Python out-of-process_. 
+% To check this, run:
+%%
+%   >> pe = pyenv;
+%   >> disp(pe.ExecutionMode)
+%%
+% If the output is not 'OutOfProcess', you must restart MATLAB and then change 
+% the default Python environment settings via:
+%%
+%   >> pyenv('ExecutionMode','OutOfProcess')
+
+%% Class: openorganelle_filebrowser
+% The *openorganelle_filebrowser* class allows users to query general 
+% information about the OpenOrganelle datasets, e.g. the names of all available 
+% datasets and their associated segmentation masks. It should be initialized 
+% without any input arguments, as the default parameters defining the locations 
+% of the AWS S3 bucket, Python modules, and organelle catalogs should be stable 
+% at least for use on the St. Jude network. 
+fb = openorganelle_filebrowser;
+disp(fb)
+
+%% Example: list datasets stored on AWS
+fb.ls_datasets;
+
+%% Example: list all segmentation (label) layers available for jrc_macrophage-2
+% The following command displays a list of all segmentation types stored in the
+% jrc_hela-2 N5. In principle, any of these can be catalogued into instance
+% bounding boxes (see *openorganelle_dataset.do_catalog* below).
+fb.ls_segmentations('jrc_macrophage-2');
+
+%% Class: openorganelle_dataset
+% The *openorganelle_dataset* class is a subclass of openorganelle_filebrowser.
+% This class is used to retrieve organelle volumes, and general image volumes, 
+% belonging to a specified biological cell. The class should be initialized with 
+% the cell of interest's COSEM name as the first input argument. 
+%
+% Let's say we want to probe jrc_hela-2:
+ds = openorganelle_dataset('jrc_hela-2');
+disp(ds)
+
+%%
+% In addition to returning arbitrary volumes from both FIB-SEM (grayscale) and 
+% segmentation (binary label) layers, this class uses and can be used to 
+% generate bounding box catalogs that retrieve sparse matrices with masks 
+% corresponding to specific instances of a given organelle.
+%
+% Additionally, openorganelle_dataset inherits the usual properties and methods 
+% of its superclass with some minor modifications to make certain queries 
+% specific to the dataset of interest, e.g. openorganelle_dataset.ls_segmentations
+% does not take any input arguments and simply returns the list of segmentation 
+% layers associated with the initialized dataset.
+
+%% Example: retrieve the mask for a specific mitochondrion instance
+% Let's say we want the binary mask of the 25-th catalogued mitochrondrion.
+%%
+S = ds.get_organelle('mito_seg',25);
+%%
+disp(S)
+%%
+% Notice that the organelle_idx field here is returned from Python and
+% therefore 0-indexed (24), rather than MATLAB's 1-index (25). 
+
+%% Example: retrieve multiple masks for specific mitochondria instances
+% If multiple masks are needed, it is generally much faster to submit multiple 
+% indices to get_organelle at once rather than call the function
+% repeatedly. Say we want the mitochrondria catalogued at
+% [1,2,3,10,19,25,60] with their FIB-SEM grayscale values:
+S = ds.get_organelle('mito_seg',[1:3,10,19,25,60],'with_fibsem',true);
+%%
+disp(S)
+%%
+% The image/mask volumes are stored in a cell array in the order that they
+% were submitted. Then the mask and FIB-SEM data for the 25-th mitochrondrion 
+% are at the 6-th index of the returned arrays. However, when 'with_fibsem' is 
+% set to true, the resultant volumes are returned at a lower resolution:
+disp(size(S.data_mask{6}))
+%%
+% This is because the label volumes were upscaled at Janelia (2x in all 
+% dimensions) for segmentation purposes and get_organelle returns
+% volumes at the highest possible resolution while retaining a consistent
+% coordinate system with FIB-SEM data if needed.
+
+%% Example: retrieve an arbitrary FIB-SEM volume
+% Note that all bounding boxes stored in either a catalog or returned by 
+% get_organelle or get_volume functions obey the scikit-image convention of
+% [x_min, y_min, z_min, x_max, y_max, z_max]. Say we want to look at the 
+% FIB-SEM volume defined by the bounding box [100,200,300,250,400,350]:
+V = ds.get_volume('fibsem-uint8',[100,200,300,250,400,350]);
+whos V
+%%
+disp(V(1:10,1:10))
+%%
+% Again, by default the highest resolution is returned. Resolution levels
+% can be explicitly requested, with input bounding boxes assumed to be on the 
+% coordinate system defined by the requested resolution level. The parameter
+% 'resolution' should be an integer between 0 and 4 (or 5) in order of
+% decreasing resolution.
+V = ds.get_volume('fibsem-uint8',[100,200,300,250,400,350],'resolution',0);
+disp(V(1:10,1:10))
+
+%% Example: retrieve an arbitrary label volume
+V = ds.get_volume('lyso_seg',[100,200,300,250,400,350]);
+whos V
+
+%% Example: run catalog of centrioles
+% Let's say we want to look at instances of segmented centrioles using 
+% get_organelle but the label volume has not been catalogued yet. To
+% catalog:
+[catalog_filename,J] = ds.do_catalog('cent_seg');
+%%
+% By default, this function will not run if the catalog already exists but
+% it can be forced to perform an overwrite ('overwrite_if_exists',true).
+% Cataloguing returns the location of the catalog JSON:
+disp(catalog_filename)
+%%
+% and a struct corresponding to the JSON:
+disp(J)
+
+
+##### SOURCE END #####
+--></body></html>

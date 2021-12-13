@@ -1,0 +1,74 @@
+{
+  "bounding_boxes": [
+    [
+      2463,
+      1416,
+      4111,
+      2491,
+      1440,
+      4156
+    ],
+    [
+      2747,
+      1176,
+      6216,
+      2808,
+      1311,
+      6323
+    ],
+    [
+      2805,
+      1178,
+      6144,
+      2904,
+      1312,
+      6264
+    ],
+    [
+      2856,
+      1259,
+      6226,
+      2901,
+      1323,
+      6286
+    ],
+    [
+      6189,
+      492,
+      948,
+      6216,
+      536,
+      975
+    ],
+    [
+      6213,
+      725,
+      1801,
+      6248,
+      776,
+      1872
+    ]
+  ],
+  "cosem_labels": [
+    47291620128,
+    52861578257,
+    55280490193,
+    54838866250,
+    118995348953,
+    119299741830
+  ],
+  "name": "array-53b7b3f3715e2d3931a42e64a572a646",
+  "pixelResolution": {
+    "dimensions": [
+      4.0,
+      4.0,
+      5.24
+    ],
+    "unit": "nm"
+  },
+  "merge_check_skipped": false,
+  "urlpath_bb": "s3://janelia-cosem/jrc_hela-2/jrc_hela-2.n5/labels/cent_seg/s0",
+  "urlpath_downsample": "s3://janelia-cosem/jrc_hela-2/jrc_hela-2.n5/labels/cent_seg/s3",
+  "catalog_time": 1638981815.9319,
+  "time_to_catalog": "0:00:38.622030"
+}
